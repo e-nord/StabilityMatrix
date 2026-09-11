@@ -16,6 +16,13 @@ public class LaunchOption
     [JsonIgnore]
     public bool HasDefaultValue => DefaultValue != null;
 
+    /// <summary>
+    /// When set, this option is exclusive with other options sharing the same GroupName
+    /// (rendered as radio buttons instead of checkboxes).
+    /// </summary>
+    [JsonIgnore]
+    public string? GroupName { get; init; }
+
     [JsonConverter(typeof(LaunchOptionValueJsonConverter))]
     public object? OptionValue { get; set; }
 

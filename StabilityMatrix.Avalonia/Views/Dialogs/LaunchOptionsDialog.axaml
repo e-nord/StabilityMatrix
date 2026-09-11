@@ -154,11 +154,24 @@
                                         FontWeight="Bold"
                                         Text="{Binding Title}"
                                         TextWrapping="Wrap" />
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel IsVisible="{Binding !IsSingleSelect}" Orientation="Horizontal">
                                         <ItemsControl ItemsSource="{Binding Options}">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
                                                     <CheckBox Content="{Binding Name}" IsChecked="{Binding OptionValue, Converter={StaticResource LaunchOptionConverter}}" />
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                    <!--  Mutually exclusive options are rendered as radio buttons  -->
+                                    <StackPanel IsVisible="{Binding IsSingleSelect}" Orientation="Horizontal">
+                                        <ItemsControl ItemsSource="{Binding Options}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <RadioButton
+                                                        Content="{Binding Name}"
+                                                        GroupName="{Binding GroupName}"
+                                                        IsChecked="{Binding OptionValue, Converter={StaticResource LaunchOptionConverter}}" />
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>

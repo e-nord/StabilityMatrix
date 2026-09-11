@@ -9,6 +9,12 @@ public readonly record struct LaunchOptionCard
     public required LaunchOptionType Type { get; init; }
     public required IReadOnlyList<LaunchOption> Options { get; init; }
     public string? Description { get; init; }
+    public int? MaxSelectedOptions { get; init; }
+
+    /// <summary>
+    /// True if this card's options are mutually exclusive and should be rendered as radio buttons.
+    /// </summary>
+    public bool IsSingleSelect => MaxSelectedOptions == 1;
 
     public static LaunchOptionCard FromDefinition(LaunchOptionDefinition definition)
     {
@@ -17,6 +23,7 @@ public readonly record struct LaunchOptionCard
             Title = definition.Name,
             Description = definition.Description,
             Type = definition.Type,
+            MaxSelectedOptions = definition.MaxSelectedOptions,
 
             Options = definition
                 .Options.Select(s =>
@@ -26,6 +33,7 @@ public readonly record struct LaunchOptionCard
                         Name = s,
                         Type = definition.Type,
                         DefaultValue = definition.DefaultValue,
+                        GroupName = definition.MaxSelectedOptions == 1 ? definition.Name : null,
                     };
                     return option;
                 })
@@ -103,6 +111,7 @@ public readonly record struct LaunchOptionCard
                 Title = definition.Name,
                 Description = definition.Description,
                 Type = definition.Type,
+                MaxSelectedOptions = definition.MaxSelectedOptions,
                 Options = definition
                     .Options.Select(s =>
                     {
@@ -126,6 +135,7 @@ public readonly record struct LaunchOptionCard
                             Type = definition.Type,
                             DefaultValue = definition.DefaultValue,
                             OptionValue = userValue,
+                            GroupName = definition.MaxSelectedOptions == 1 ? definition.Name : null,
                         };
                         return option;
                     })

@@ -67,6 +67,7 @@ public class ComfyZluda(
                     Name = "Cross Attention Method",
                     Type = LaunchOptionType.Bool,
                     InitialValue = "--use-quad-cross-attention",
+                    MaxSelectedOptions = 1,
                     Options =
                     [
                         "--use-split-cross-attention",
