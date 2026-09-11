@@ -73,6 +73,7 @@ public class ComfyZluda(
                         "--use-quad-cross-attention",
                         "--use-pytorch-cross-attention",
                         "--use-sage-attention",
+                        "--use-ck-attention",
                     ],
                 },
                 new()
